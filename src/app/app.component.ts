@@ -19,8 +19,9 @@ export class AppComponent {
     textArea.select();
 
     try {
-      var successful = document.execCommand("copy");
-      var msg = successful ? "successful" : "unsuccessful";
+      const successful = document.execCommand("copy");
+      // tslint:disable-next-line:quotemark
+      const msg = successful ? "successful" : "unsuccessful";
       console.log("Fallback: Copying text command was " + msg);
     } catch (err) {
       console.error("Fallback: Oops, unable to copy", err);
@@ -36,13 +37,15 @@ export class AppComponent {
       this.fallbackCopyTextToClipboard(matIcon, idx);
       return;
     }
-    (window.navigator as any).writeText(matIcon).then(
-      () => {
-        alert("Async: Copying to clipboard was successful!");
-      },
-      function(err) {
-        alert("Async: Could not copy text: ");
-      }
-    );
+    if ((window.navigator as any).clipboard) {
+      (window.navigator as any).clipboard.writeText(matIcon).then(
+        () => {
+          alert(`"${icon.name}" copied to clipboard was successful !`);
+        },
+        err => {
+          alert(`Could not copy "${icon.name}" !`);
+        }
+      );
+    }
   }
 }
