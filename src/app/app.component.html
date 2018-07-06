@@ -1,4 +1,11 @@
-<header class="header">this is header</header>
+<header class="header">
+  <h1 class="title">Material ICON</h1>
+  <h2 class="mt-24">Pick, Click, Paste and Go 🚀</h2>
+  <div class="btns">
+    <a class="btn btn-pink mr-20" target="_blank" href="https://github.com/HelloQingGuo/material-icons-click-paste">⭐ Github</a>
+    <a class="btn btn-pink" target="_blank" href="https://helloqingguo.github.io/">🙈 Me</a>
+  </div>
+</header>
 <main class="wrap">
   <div class="row" id="list-icon">
     <article class="icon-card" *ngFor="let icon of icons; let i = index" (click)="copyTextToClipboard(icon, i)">

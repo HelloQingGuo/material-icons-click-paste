@@ -2,6 +2,37 @@
   background-color: #ffdd67;
   padding: 4.5em 2em;
   text-align: center;
+  .title {
+    font-size: 2.9em;
+    letter-spacing: 1.4px;
+  }
+
+  .btns {
+    padding: 1em 0;
+    text-align: center;
+  }
+
+  .btn {
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 1.05em;
+    padding: 0.75em 1em;
+    margin: 0.25em 0;
+    position: relative;
+  }
+
+  .btn-pink {
+    background-color: #ff5a79;
+    color: #fff;
+    box-shadow: 0 4px #f3002e;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+    }
+  }
 }
 
 .wrap {
@@ -15,13 +46,38 @@
     flex-wrap: wrap;
 
     .icon-card {
-      width: 10%;
+      width: 12.5%;
       min-width: 50px;
+      height: 100px;
       cursor: pointer;
+      /*
+       text with "overflow: hidden" still uses up padding-right space
+       using transparent border-right instead of padding-right
+      */
       overflow: hidden;
-      padding: 0 14px;
-      margin: 14px auto;
+      padding: 0 0 0 10px;
+      border-right: solid 10px rgba(0, 0, 0, 0);
+      margin: 4px auto;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      transition: all 0.2s ease;
+      border-radius: 4px;
+
+      .icon-header {
+        margin-top: 10px;
+      }
+
+      .icon-name {
+        margin-bottom: 10px;
+        font-size: 0.9em;
+      }
+
+      &:hover {
+        background: #ff5a79;
+        color: #fff;
+      }
     }
   }
 }
