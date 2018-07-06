@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
-    "deploy": "ng build --prod --base-href material-icons-click-paste/ --deploy-url material-icons-click-paste/",
+    "deploy": "ng build --prod --deploy-url material-icons-click-paste/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
