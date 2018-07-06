@@ -27,7 +27,7 @@ export class AppComponent {
         alert(`Unable to copy "${matIcon.name}" !`);
       }
     } catch (err) {
-      alert(`Unable to copy "${matIcon.name}" !`);
+      alert(`Error happened when copying "${matIcon.name}" !`);
     }
 
     listOfIcons.removeChild(textArea);
