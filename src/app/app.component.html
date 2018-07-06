@@ -1,3 +1,15 @@
-<i class="material-icons" *ngFor="let icon of icons" (click)="copyTextToClipboard(icon)">
-  {{ icon.name }}
-</i>
+<header class="header">this is header</header>
+<main class="wrap">
+  <div class="row" id="list-icon">
+    <article class="icon-card" *ngFor="let icon of icons; let i = index" (click)="copyTextToClipboard(icon, i)">
+      <header class="icon-header">
+        <i class="material-icons md-30">
+          {{ icon.name }}
+        </i>
+      </header>
+      <div class="icon-name">
+        {{ icon.name }}
+      </div>
+    </article>
+  </div>
+</main>

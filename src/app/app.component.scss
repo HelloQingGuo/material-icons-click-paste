@@ -1,0 +1,27 @@
+.header {
+  background-color: #ffdd67;
+  padding: 4.5em 2em;
+  text-align: center;
+}
+
+.wrap {
+  padding: 3.5em 2em;
+  background: #eee;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+
+    .icon-card {
+      width: 10%;
+      min-width: 50px;
+      cursor: pointer;
+      overflow: hidden;
+      padding: 0 14px;
+      margin: 14px auto;
+      text-align: center;
+    }
+  }
+}
