@@ -9,9 +9,10 @@ import { icons, icon } from "./icons";
 export class AppComponent {
   icons: icon[] = icons;
 
-  fallbackCopyTextToClipboard(text, idx) {
+  fallbackCopyTextToClipboard(matIcon, idx) {
+    const transformedText = `<mat-icon>${matIcon.name}</mat-icon>`;
     const textArea = document.createElement("textarea");
-    textArea.value = text;
+    textArea.value = transformedText;
 
     const listOfIcons = document.getElementById("list-icon");
     listOfIcons.insertBefore(textArea, listOfIcons.children[idx]);
@@ -19,31 +20,33 @@ export class AppComponent {
     textArea.select();
 
     try {
-      const successful = document.execCommand("copy");
-      // tslint:disable-next-line:quotemark
-      const msg = successful ? "successful" : "unsuccessful";
-      console.log("Fallback: Copying text command was " + msg);
+      const isSucceeded = document.execCommand("copy");
+      if (isSucceeded) {
+        alert(`"${matIcon.name}" copied to clipboard was successful !`);
+      } else {
+        alert(`Unable to copy "${matIcon.name}" !`);
+      }
     } catch (err) {
-      console.error("Fallback: Oops, unable to copy", err);
+      alert(`Unable to copy "${matIcon.name}" !`);
     }
 
     listOfIcons.removeChild(textArea);
   }
 
-  copyTextToClipboard(icon, idx) {
+  copyTextToClipboard(matIcon, idx) {
     // const transformedText = `<i class="material-icons">${icon.name}</i>`;
-    const matIcon = `<mat-icon>${icon.name}</mat-icon>`;
+    const transformedText = `<mat-icon>${matIcon.name}</mat-icon>`;
     if (!(window.navigator as any).clipboard) {
       this.fallbackCopyTextToClipboard(matIcon, idx);
       return;
     }
     if ((window.navigator as any).clipboard) {
-      (window.navigator as any).clipboard.writeText(matIcon).then(
+      (window.navigator as any).clipboard.writeText(transformedText).then(
         () => {
-          alert(`"${icon.name}" copied to clipboard was successful !`);
+          alert(`"${matIcon.name}" copied to clipboard was successful !`);
         },
         err => {
-          alert(`Could not copy "${icon.name}" !`);
+          alert(`Could not copy "${matIcon.name}" !`);
         }
       );
     }
