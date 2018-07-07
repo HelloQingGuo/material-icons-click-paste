@@ -20,10 +20,13 @@ export class AppComponent {
   displayNotification(text) {
     // check if there is a pending dismiss task
     // if so, clear timer
-    clearTimeout(this.timer);
-    this.isActive = true;
-    this.text = text;
-    this.dismiss();
+    this.isActive = false;
+    window.setTimeout(() => {
+      clearTimeout(this.timer);
+      this.isActive = true;
+      this.text = text;
+      this.dismiss();
+    }, 150);
   }
 
   transformText(matIcon) {
