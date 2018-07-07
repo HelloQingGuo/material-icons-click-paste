@@ -49,14 +49,14 @@ export class AppComponent {
     try {
       if (document.execCommand("copy")) {
         this.displayNotification(
-          `"${matIcon.name}" copied to clipboard was successful !`
+          `✨ "${matIcon.name}" was copied to clipboard !`
         );
       } else {
-        this.displayNotification(`Unable to copy "${matIcon.name}" !`);
+        this.displayNotification(`💥 Unable to copy "${matIcon.name}" !`);
       }
     } catch (err) {
       this.displayNotification(
-        `Error happened when copying "${matIcon.name}" !`
+        `💥 Error happened when copying "${matIcon.name}" !`
       );
     }
     listOfIcons.removeChild(textArea);
@@ -68,11 +68,11 @@ export class AppComponent {
       .then(
         () => {
           this.displayNotification(
-            `"${matIcon.name}" copied to clipboard was successful !`
+            `✨ "${matIcon.name}" was copied to clipboard !`
           );
         },
         err => {
-          this.displayNotification(`Unable to copy "${matIcon.name}" !`);
+          this.displayNotification(`💥 Unable to copy "${matIcon.name}" !`);
         }
       );
   }
