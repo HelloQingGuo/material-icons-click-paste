@@ -30,7 +30,8 @@
     transition: all 0.2s ease;
 
     &:hover {
-      transform: translateY(-4px);
+      transform: translateY(-2px);
+      box-shadow: 0px 5px 4px 0px rgba(243, 0, 46, 0.9);
     }
   }
 }

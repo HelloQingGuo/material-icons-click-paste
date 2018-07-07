@@ -8,47 +8,80 @@ import { icons, icon } from "./icons";
 })
 export class AppComponent {
   icons: icon[] = icons;
+  isActive = false;
+  text: string;
+  timer: number;
+  dismiss() {
+    this.timer = window.setTimeout(() => {
+      this.isActive = false;
+    }, 2000);
+  }
+
+  displayNotification(text) {
+    // check if there is a pending dismiss task
+    // if so, clear timer
+    clearTimeout(this.timer);
+    this.isActive = true;
+    this.text = text;
+    this.dismiss();
+  }
+
+  transformText(matIcon) {
+    // `<i class="material-icons">${icon.name}</i>`;
+    return `<mat-icon>${matIcon.name}</mat-icon>`;
+  }
 
   fallbackCopyTextToClipboard(matIcon, idx) {
-    const transformedText = `<mat-icon>${matIcon.name}</mat-icon>`;
     const textArea = document.createElement("textarea");
-    textArea.value = transformedText;
-
+    textArea.value = this.transformText(matIcon);
+    // because the text area takes spaces
+    // when it is inserted into the list, if the current element
+    // exceeds the view port, the window will scroll to make sure
+    // the element is in the view. Therefore, we need to set the size of textarea
+    // to 0 to avoid window scrolling.
+    textArea.style.height = "0";
+    textArea.style.width = "0";
     const listOfIcons = document.getElementById("list-icon");
     listOfIcons.insertBefore(textArea, listOfIcons.children[idx]);
     textArea.focus();
     textArea.select();
 
     try {
-      const isSucceeded = document.execCommand("copy");
-      if (isSucceeded) {
-        alert(`"${matIcon.name}" copied to clipboard was successful !`);
+      if (document.execCommand("copy")) {
+        this.displayNotification(
+          `"${matIcon.name}" copied to clipboard was successful !`
+        );
       } else {
-        alert(`Unable to copy "${matIcon.name}" !`);
+        this.displayNotification(`Unable to copy "${matIcon.name}" !`);
       }
     } catch (err) {
-      alert(`Error happened when copying "${matIcon.name}" !`);
+      this.displayNotification(
+        `Error happened when copying "${matIcon.name}" !`
+      );
     }
-
     listOfIcons.removeChild(textArea);
   }
 
-  copyTextToClipboard(matIcon, idx) {
-    // const transformedText = `<i class="material-icons">${icon.name}</i>`;
-    const transformedText = `<mat-icon>${matIcon.name}</mat-icon>`;
-    if (!(window.navigator as any).clipboard) {
-      this.fallbackCopyTextToClipboard(matIcon, idx);
-      return;
-    }
-    if ((window.navigator as any).clipboard) {
-      (window.navigator as any).clipboard.writeText(transformedText).then(
+  _copyTextToClipboard(matIcon) {
+    (window.navigator as any).clipboard
+      .writeText(this.transformText(matIcon))
+      .then(
         () => {
-          alert(`"${matIcon.name}" copied to clipboard was successful !`);
+          this.displayNotification(
+            `"${matIcon.name}" copied to clipboard was successful !`
+          );
         },
         err => {
-          alert(`Could not copy "${matIcon.name}" !`);
+          this.displayNotification(`Unable to copy "${matIcon.name}" !`);
         }
       );
+  }
+
+  copyTextToClipboard(matIcon, idx) {
+    if (!(window.navigator as any).clipboard) {
+      this.fallbackCopyTextToClipboard(matIcon, idx);
+    } else {
+      this._copyTextToClipboard(matIcon);
     }
   }
 }

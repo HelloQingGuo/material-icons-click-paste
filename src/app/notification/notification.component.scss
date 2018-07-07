@@ -1,0 +1,22 @@
+.notification {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  color: #fff;
+  font-weight: 600;
+  background: #ff5a79;
+  height: 60px;
+  line-height: 60px;
+  padding: 0 20px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  transform: scale(0);
+  opacity: 0;
+  transform-origin: bottom;
+  box-shadow: -3px 6px 8px 0px rgba(216, 70, 70, 0.35);
+}
+
+.notification.active {
+  opacity: 1;
+  transform: scale(1);
+}
