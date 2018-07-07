@@ -1,3 +1,6 @@
+$lineHeight: 24px;
+$height: 60px;
+
 .notification {
   position: fixed;
   top: 25px;
@@ -5,9 +8,10 @@
   color: #fff;
   font-weight: 600;
   background: #ff5a79;
-  height: 60px;
-  line-height: 60px;
-  padding: 0 20px;
+  max-width: calc(100% - 50px);
+  min-height: $height;
+  line-height: $lineHeight;
+  padding: ($height - $lineHeight) / 2 20px;
   border-radius: 4px;
   transition: all 0.3s ease;
   transform: scale(0);
