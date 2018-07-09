@@ -1,14 +1,15 @@
 $lineHeight: 24px;
 $height: 60px;
+$distance: 25px;
 
 .notification {
-  position: fixed;
-  top: 25px;
-  right: 25px;
   color: #fff;
   font-weight: 600;
   background: #ff5a79;
-  max-width: calc(100% - 50px);
+  position: fixed;
+  top: $distance;
+  right: $distance;
+  max-width: calc(100% - #{$distance} * 2);
   min-height: $height;
   line-height: $lineHeight;
   padding: ($height - $lineHeight) / 2 20px;
