@@ -7,17 +7,22 @@
   </div>
 </header>
 <main class="wrap">
-  <div class="row" id="list-icon">
-    <article class="icon-card" *ngFor="let icon of icons; let i = index" (click)="copyTextToClipboard(icon, i)">
-      <header class="icon-header">
-        <i class="material-icons md-30">
-          {{ icon.name }}
-        </i>
-      </header>
-      <div class="icon-name">
-        {{ icon.name }}
-      </div>
-    </article>
-  </div>
+  <section *ngFor="let ctgy of categories; let i = index">
+    <div class="divider" *ngIf="i !== 0"></div>
+    <div class="row-header">{{ctgy.name}}</div>
+    <div class="row">
+      <article class="icon-card" *ngFor="let icon of ctgy.icons; let j = index" (click)="copyTextToClipboard(icon, i, j)">
+        <header class="icon-header">
+          <i class="material-icons md-30">
+            {{ icon.id }}
+          </i>
+        </header>
+        <div class="icon-name">
+          {{ icon.id }}
+        </div>
+      </article>
+    </div>
+  </section>
+
 </main>
 <app-notification [text]="text" [isActive]="isActive"></app-notification>

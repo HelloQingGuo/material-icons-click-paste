@@ -37,11 +37,18 @@
 }
 
 .wrap {
-  padding: 3.5em 2em;
+  padding: 2.5em 2em;
   background: #eee;
   max-width: 1200px;
   margin: 0 auto;
-
+  .row-header {
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: rgba(255, 90, 121, 0.75);
+    margin-bottom: 8px;
+  }
   .row {
     display: flex;
     flex-wrap: wrap;
@@ -81,4 +88,12 @@
       }
     }
   }
+}
+
+.divider {
+  background: #ccc;
+  height: 1px;
+  width: 100%;
+  border: none;
+  margin: 26px 0;
 }

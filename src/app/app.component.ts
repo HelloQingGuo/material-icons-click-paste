@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { icons, icon } from "./icons";
+import { categories, icon } from "./icons";
 
 @Component({
   selector: "app-root",
@@ -7,7 +7,11 @@ import { icons, icon } from "./icons";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
-  icons: icon[] = icons;
+  // icons: icon[] = icons;
+  categories: {
+    name: string;
+    icons: icon[];
+  }[] = categories;
   isActive = false;
   text: string;
   timer: number;
@@ -31,10 +35,10 @@ export class AppComponent {
 
   transformText(matIcon) {
     // `<i class="material-icons">${icon.name}</i>`;
-    return `<mat-icon>${matIcon.name}</mat-icon>`;
+    return `<mat-icon>${matIcon.id}</mat-icon>`;
   }
 
-  fallbackCopyTextToClipboard(matIcon, idx) {
+  fallbackCopyTextToClipboard(matIcon, groupIdx, iconIdx) {
     const textArea = document.createElement("textarea");
     textArea.value = this.transformText(matIcon);
     // because the text area takes spaces
@@ -44,25 +48,30 @@ export class AppComponent {
     // to 0 to avoid window scrolling.
     textArea.style.height = "0";
     textArea.style.width = "0";
-    const listOfIcons = document.getElementById("list-icon");
-    listOfIcons.insertBefore(textArea, listOfIcons.children[idx]);
+    const groups = document.getElementsByClassName("row");
+    const listOfIcons = groups[groupIdx];
+    console.log("here");
+
+    listOfIcons.insertBefore(textArea, listOfIcons.children[iconIdx]);
+    // document.body.appendChild(textArea);
     textArea.focus();
     textArea.select();
 
     try {
       if (document.execCommand("copy")) {
         this.displayNotification(
-          `✨ "${matIcon.name}" was copied to clipboard !`
+          `✨ "${matIcon.id}" was copied to clipboard !`
         );
       } else {
-        this.displayNotification(`💥 Unable to copy "${matIcon.name}" !`);
+        this.displayNotification(`💥 Unable to copy "${matIcon.id}" !`);
       }
     } catch (err) {
       this.displayNotification(
-        `💥 Error happened when copying "${matIcon.name}" !`
+        `💥 Error happened when copying "${matIcon.id}" !`
       );
     }
     listOfIcons.removeChild(textArea);
+    // document.body.removeChild(textArea);
   }
 
   _copyTextToClipboard(matIcon) {
@@ -71,18 +80,18 @@ export class AppComponent {
       .then(
         () => {
           this.displayNotification(
-            `✨ "${matIcon.name}" was copied to clipboard !`
+            `✨ "${matIcon.id}" was copied to clipboard !`
           );
         },
         err => {
-          this.displayNotification(`💥 Unable to copy "${matIcon.name}" !`);
+          this.displayNotification(`💥 Unable to copy "${matIcon.id}" !`);
         }
       );
   }
 
-  copyTextToClipboard(matIcon, idx) {
+  copyTextToClipboard(matIcon, groupIdx, iconIdx) {
     if (!(window.navigator as any).clipboard) {
-      this.fallbackCopyTextToClipboard(matIcon, idx);
+      this.fallbackCopyTextToClipboard(matIcon, groupIdx, iconIdx);
     } else {
       this._copyTextToClipboard(matIcon);
     }
